@@ -55,10 +55,13 @@ async function addContact(name, email, phone) {
   };
   const arr = JSON.parse(result);
   arr.push(newContact);
-
+  console.log(`Added newContact`);
   fs.writeFile("./db/contacts.json", JSON.stringify(arr));
 }
-// addContact("Viktor", "3err3", "r4r4rr4");
+// listContacts()
+// getContactById("qdggE76Jtbfd9eWJHrssH")
+// removeContact("qdggE76Jtbfd9eWJHrssH");
+addContact("Viktor", "3err3", "r4r4rr4");
 
 // const rd = fs
 //   .readFile("./db/contacts.json")
