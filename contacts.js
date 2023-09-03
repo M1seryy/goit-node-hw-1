@@ -53,6 +53,7 @@ async function addContact(name, email, phone) {
     email,
     phone,
   };
+  console.log('newContact', newContact)
   const arr = JSON.parse(result);
   arr.push(newContact);
   console.log(`Added newContact`);
@@ -61,8 +62,8 @@ async function addContact(name, email, phone) {
 // listContacts()
 // getContactById("qdggE76Jtbfd9eWJHrssH")
 // removeContact("qdggE76Jtbfd9eWJHrssH");
-addContact("Viktor", "3err3", "r4r4rr4");
-
+// addContact("Viktor", "3err3", "r4r4rr4");
+exports.modules = { listContacts, getContactById, removeContact, addContact };
 // const rd = fs
 //   .readFile("./db/contacts.json")
 //   .then((data) => console.log("data", JSON.parse(data.toString())));
