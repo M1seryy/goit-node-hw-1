@@ -14,9 +14,10 @@ async function listContacts() {
 
   const result = await fs
     .readFile("./db/contacts.json", "utf8")
-    .then((data) => data)
+    .then((data) => JSON.parse(data))
     .catch((err) => err);
-  console.table(JSON.parse(result));
+  return result;
+  // console.table(result);
 }
 
 async function getContactById(contactId) {
@@ -25,7 +26,7 @@ async function getContactById(contactId) {
     .readFile("./db/contacts.json", "utf8")
     .then((data) => data)
     .catch((err) => err);
-  console.log(
+ return(
     `Get contact by ID ${contactId}:`,
     JSON.parse(result).filter((item) => item.id === contactId)
   );
@@ -37,9 +38,10 @@ async function removeContact(contactId) {
     .readFile("./db/contacts.json", "utf8")
     .then((data) => data)
     .catch((err) => err);
-  console.log(`Delete contact by ID ${contactId}:`);
+
   const newContact = JSON.parse(result).filter((item) => item.id !== contactId);
   fs.writeFile("./db/contacts.json", JSON.stringify(newContact));
+  return newContact
 }
 
 async function addContact(name, email, phone) {
@@ -53,11 +55,10 @@ async function addContact(name, email, phone) {
     email,
     phone,
   };
-  console.log('newContact', newContact)
   const arr = JSON.parse(result);
   arr.push(newContact);
-  console.log(`Added newContact`);
   fs.writeFile("./db/contacts.json", JSON.stringify(arr));
+  return newContact
 }
 // listContacts()
 // getContactById("qdggE76Jtbfd9eWJHrssH")

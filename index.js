@@ -10,7 +10,6 @@ program
   .option("-n, --name <type>", "user name")
   //   .argument("<string>")
   .action((str, options) => {
-    console.log("str: ", str);
     invokeAction({
       action: "list",
     });
@@ -49,12 +48,12 @@ program
     });
   });
 
-//   node index add '{
-//     "id": "Cfrfrf9sjBfCo4UJCWjzBnOtxl",
-//     "name": "Simofrfrfn Morton",
-//     "email": "dui.Fuscfre.diam@Donec.com",
-//     "phone": "(233) 738-frfr2360"
-//   }'
+// node index add '{
+//   "id": "Cfrfrf9sjBfCo4UJCWjzBnOtxl",
+//   "name": "Simofrfrfn Morton",
+//   "email": "dui.Fuscfre.diam@Donec.com",
+//   "phone": "(233) 738-frfr2360"
+// }'
 
 program
   .command("remove")
@@ -69,25 +68,28 @@ program
     });
   });
 
-function invokeAction({ action, id, name, email, phone }) {
+async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      contactsFile.modules.listContacts();
+      console.table(await contactsFile.modules.listContacts());
       break;
 
     case "get":
       // ... id
-      contactsFile.modules.getContactById(id);
+      console.log(await contactsFile.modules.getContactById(id));
+
       break;
 
     case "add":
       // ... name email phone
-      contactsFile.modules.addContact(name, email, phone);
+      console.log(`Added newContact`);
+      console.log(await contactsFile.modules.addContact(name, email, phone));
       break;
 
     case "remove":
       // ... id
-      contactsFile.modules.removeContact(id);
+      console.log(`Delete contact by ID ${id}:`);
+      console.log(await contactsFile.modules.removeContact(id));
       break;
 
     default:
@@ -95,4 +97,3 @@ function invokeAction({ action, id, name, email, phone }) {
   }
 }
 program.parse(process.argv);
-
